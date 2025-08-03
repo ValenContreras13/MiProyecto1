@@ -1,0 +1,56 @@
+<div class="maincontent p-4 bg-white shadow rounded">
+  <h1 class="mb-4 text-primary">
+    Bienvenido a <strong>CSV Parser</strong>
+  </h1>
+
+  <button (click)="loadUsers()" class="btn btn-primary mb-4">
+    Cargar usuarios
+  </button>
+
+  <!-- Mostrar solo si hay usuarios -->
+  <ng-container *ngIf="users.length > 0">
+    <p class="fw-semibold text-secondary">
+      <i class="bi bi-people-fill"></i> Usuarios totales: {{ users.length }}
+    </p>
+
+    <div class="list-group mb-5 shadow-sm rounded d-flex flex-column gap-3">
+      <div *ngFor="let u of users" class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong class="text-dark">Email:</strong> {{ u.email }}
+        </div>
+        <button (click)="actualizarUsuario(u)" class="btn btn-sm btn-warning text-white shadow-sm">
+          <i class="bi bi-pencil-square"></i> Actualizar
+        </button>
+      </div>
+    </div>
+
+    <div class="mt-5">
+      <h6 class="text-secondary">Estructura de datos:</h6>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover table-sm mt-3 shadow-sm">
+          <thead class="table-light">
+            <tr>
+              <th>#</th>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Password</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let u of users; index as i">
+              <td>{{ i + 1 }}</td>
+              <td class="text-break">{{ u._id }}</td>
+              <td>{{ u.email }}</td>
+              <td><code>{{ u.password }}</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Mensaje si no hay usuarios -->
+  <p *ngIf="users.length === 0" class="text-muted fst-italic">
+    Oprime el Boton para mostrar usuarios
+  </p>
+</div>
